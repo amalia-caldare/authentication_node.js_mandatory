@@ -60,11 +60,15 @@ const usersRoute = require('./routes/users.js');
 app.use(authRoute);
 app.use(usersRoute);
 
-app.get("/signup", (req,res) => {
+app.get('/', (req,res) =>{
+    return res.redirect('/login')
+});
+
+app.get('/signup', (req,res) => {
     return res.send(navbarPage + signupPage);
 });
 
-app.get("/login", (req,res) => {
+app.get('/login', (req,res) => {
     return res.send(navbarPage + loginPage);
 });
 

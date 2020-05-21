@@ -6,17 +6,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
 router.post('/login', (req,res) => {
-
     const {username, password} = req.body;
     if(username,password) {
         try {
             User.query().select().where('username',username).then(user => {
-                if(user.length > 0) {
                    if(bcrypt.compare(password, user[0].password)) {
-                       res.status(400).send({response: `Successfuly logged in as ${user[0].username}`})
-                   }
-                
-                }
+                         req.session.username = user[0].username;
+                         res.write('<a href="/logout">Click to logout</a>')
+                         res.end();
+                        }
             })
         }
         catch (error) {
@@ -59,7 +57,12 @@ router.post('/signup', (req,res) => {
 });
 
 router.get('/logout', (req,res) => {
-    return res.status(501).send({response: 'Not implemented'});
+    req.session.destroy(function(error){
+        if(error) {
+            res.negotiate(error);
+        }
+        res.redirect('/')
+    })
 });
 
 module.exports = router;
