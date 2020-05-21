@@ -1,8 +1,17 @@
 const express = require('express');
 const app = express();
 
-// body parser
+const fs = require('fs');
+
+app.use(express.urlencoded({ extended: false }))
+
 app.use(express.json());
+
+app.use(express.static('public'));
+
+const navbarPage = fs.readFileSync(__dirname + "/public/navbar/navbar.html", "utf8")
+const signupPage = fs.readFileSync(__dirname + "/public/signup/signup.html", "utf8");
+const loginPage = fs.readFileSync(__dirname + "/public/login/login.html", "utf8");
 
 const session = require('express-session');
 
@@ -45,17 +54,19 @@ Model.knex(knex);
 
 // Setup the routes with app
 
-// app.use((req, res, next) => {
-//     console.log("Time of request: ", new Date());
-//     //return res.send();
-//     next();
-// });
-
 const authRoute = require('./routes/auth.js');
 const usersRoute = require('./routes/users.js');
 
 app.use(authRoute);
 app.use(usersRoute);
+
+app.get("/signup", (req,res) => {
+    return res.send(navbarPage + signupPage);
+});
+
+app.get("/login", (req,res) => {
+    return res.send(navbarPage + loginPage);
+});
 
 const PORT = 3000;
 

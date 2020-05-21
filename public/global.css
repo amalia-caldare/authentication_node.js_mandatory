@@ -1,0 +1,47 @@
+body {
+    background: wheat;
+    color:black;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    text-align: center;
+  }
+  h1,
+  h2 {
+    font-weight: bold;
+  }
+  p {
+    font-size: 16px;
+    color: #cdcdcd;
+  }
+ .container-form {
+    background-color: white;
+    width: 300px;
+    padding: 50px;
+    margin: 0 auto;
+    display:inline-block;
+    
+ }
+ .form-group{
+     text-align: left;
+ }
+ .btn-primary{
+     background-color: wheat;
+     color: black;
+     border-color: whitesmoke;
+ }
+.btn-primary:hover{
+    background-color: whitesmoke;
+    color:black;
+    border-color:wheat;
+}
+
+nav {
+    border: 1px solid rgba(129, 110, 2, 0.966);
+    margin-bottom: 30px;
+}
+.navbar a{
+    margin-right: 5px;
+    text-decoration: none;
+    color: black; 
+    display: inline;
+}

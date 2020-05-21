@@ -5,11 +5,6 @@ const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
-// bcrypt.hash("password", saltRounds).then(hash => console.log(hash));
-
-// bcrypt.compare("password", "$2b$12$be6phplKjcm8XFbxVLBCVeaTM28QCzwgF8.OwLwMgJQWF2U4KNO/C")
-//     .then(result => console.log(result));
-
 router.post('/login', (req,res) => {
 
     const {username, password} = req.body;
