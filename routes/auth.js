@@ -12,13 +12,22 @@ const saltRounds = 12;
 
 router.post('/login', (req,res) => {
 
-    // 1. get data from the request
-    // 2. validate data
-    // 3. check if user exists and get the password
-    // 4. bcrypt compare
-    // 5. send a response based on the comparison
-
-    return res.status(501).send({response: 'Not implemented'});
+    const {username, password} = req.body;
+    if(username,password) {
+        try {
+            User.query().select().where('username',username).then(user => {
+                if(user.length > 0) {
+                   if(bcrypt.compare(password, user[0].password)) {
+                       res.status(400).send({response: `Successfuly logged in as ${user[0].username}`})
+                   }
+                
+                }
+            })
+        }
+        catch (error) {
+            return res.status(500).send({response: "Something went wrong with the DB"});
+        }
+    }
 });
 
 router.post('/signup', (req,res) => {
