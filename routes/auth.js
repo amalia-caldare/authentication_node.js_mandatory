@@ -5,22 +5,45 @@ const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
+//protection to check if user is authenticated.
+const redirectLogin = (req, res, next) => {
+    if(!req.session.username) {
+        res.redirect('/login');
+    } else 
+        next();
+}
+
+const redirectProfile = (req, res, next) => {
+    if(req.session.username) {
+        res.redirect('/login');
+    } else 
+        res.redirect('/profile');
+} 
+
 router.post('/login', (req,res) => {
-    const {username, password} = req.body;
-    if(username,password) {
-        try {
-            User.query().select().where('username',username).then(user => {
-                   if(bcrypt.compare(password, user[0].password)) {
-                         req.session.username = user[0].username;
-                         res.write('<a href="/logout">Click to logout</a>')
-                         res.end();
-                        }
-            })
-        }
-        catch (error) {
-            return res.status(500).send({response: "Something went wrong with the DB"});
-        }
+    if(!req.session.username){
+        const {username, password} = req.body;
+        if(username,password) {
+            try {
+                User.query().select().where('username',username).then(user => {
+                       if(bcrypt.compare(password, user[0].password)) {
+                             req.session.username = user[0].username;
+                             res.redirect('/profile');
+                             res.end();
+                            }
+                })
+            }
+            catch (error) {
+                return res.status(500).send({response: "Something went wrong with the DB"});
+            }
+        } else {
+            return res.status(500).send({response: "Username or password missing"});
+        }  
     }
+    else {
+        return res.redirect("/profile")
+    }
+ 
 });
 
 router.post('/signup', (req,res) => {

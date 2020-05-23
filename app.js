@@ -12,6 +12,7 @@ app.use(express.static('public'));
 const navbarPage = fs.readFileSync(__dirname + "/public/navbar/navbar.html", "utf8")
 const signupPage = fs.readFileSync(__dirname + "/public/signup/signup.html", "utf8");
 const loginPage = fs.readFileSync(__dirname + "/public/login/login.html", "utf8");
+const userPage = fs.readFileSync(__dirname + "/public/profile/profile.html", "utf8");
 
 const session = require('express-session');
 
@@ -24,22 +25,22 @@ app.use(session({
     saveUninitialized: true
 }));
 
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, //15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
-});
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, //15 minutes
+//     max: 100 // limit each IP to 100 requests per windowMs
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
-const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, //15 minutes
-    max: 8 // limit each IP to 8 requests per windowMs
-});
+// const authLimiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, //15 minutes
+//     max: 8 // limit each IP to 8 requests per windowMs
+// });
 
-app.use('/signup',authLimiter);
-app.use('/login', authLimiter);
+//  app.use('/signup',authLimiter);
+//  app.use('/login', authLimiter);
 
 // Setup Knex with Objection
 
@@ -61,7 +62,7 @@ app.use(authRoute);
 app.use(usersRoute);
 
 app.get('/', (req,res) =>{
-    return res.redirect('/login')
+    return res.send('/login')
 });
 
 app.get('/signup', (req,res) => {
@@ -69,7 +70,21 @@ app.get('/signup', (req,res) => {
 });
 
 app.get('/login', (req,res) => {
-    return res.send(navbarPage + loginPage);
+    if(req.session.username){
+        return res.redirect("/profile");
+    }
+      else {
+        return res.send(navbarPage + loginPage);
+      }
+});
+
+app.get('/profile', (req,res) => {
+    if(req.session.username) {
+        return res.send(navbarPage + userPage);
+    }
+    else {
+        return res.send("/login")
+    }
 });
 
 const PORT = 3000;
