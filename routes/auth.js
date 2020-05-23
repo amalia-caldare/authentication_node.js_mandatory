@@ -47,8 +47,8 @@ router.post('/login', (req,res) => {
 });
 
 router.post('/signup', (req,res) => {
-    const {username, password } = req.body;
-    if( username && password) {
+    const {username, email, password } = req.body;
+    if( username && email && password) {
         if(password.length < 9) { 
             return res.status(400).send({response: "Password must be 8 characters"});
         } else {
@@ -61,6 +61,7 @@ router.post('/signup', (req,res) => {
                         bcrypt.hash(password,saltRounds).then(hashedPassword => {
                             User.query().insert({
                                 username,
+                                email,
                                 password: hashedPassword
                             }).then(createdUser => {
                               return res.send({response: `The user ${createdUser.username} was created`});

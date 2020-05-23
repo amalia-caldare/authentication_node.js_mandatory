@@ -62,7 +62,7 @@ app.use(authRoute);
 app.use(usersRoute);
 
 app.get('/', (req,res) =>{
-    return res.send('/login')
+    return res.redirect('/login')
 });
 
 app.get('/signup', (req,res) => {
@@ -83,7 +83,7 @@ app.get('/profile', (req,res) => {
         return res.send(navbarPage + userPage);
     }
     else {
-        return res.send("/login")
+        return res.redirect("/login")
     }
 });
 
