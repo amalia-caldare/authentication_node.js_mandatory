@@ -1,1 +1,20 @@
-<h1>Add Course</h1>
+<%- include ('navbar.ejs')%>
+<div class="container-form">
+    <form action="/newcourse" method="POST"> 
+      <h2>Sign up for a new course</h2>
+        <div class="form-group">
+          <label for="course_name">Courses</label>
+          <select name="course_name">
+              <option>Python</option>
+              <option>Node.js</option>
+              <option>C</option>
+              <option>PADC</option>
+              <option>Android</option>
+              <option>IOS</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form> 
+    </div>
+</body>
+</html>

@@ -32,25 +32,23 @@ router.post('/login', (req,res) => {
                         if(result){
                              req.session.userId = user[0].id;
                              req.session.username = user[0].username;
-                             res.redirect('/');
+                             res.redirect('/')
                              res.end('done');
                         } else {
-                            res.send({response: 'Wrong password'})
+                            return res.status(500).redirect('/login?Wrong username or password')
                         }
-                        
                    });
                 }
                 else {
-                    res.send({response: 'Wrong username'});
+                   return res.status(500).redirect('/login?Wrong username or password.');
                  }
               });
             }
             catch (error) {
-                return res.status(500).send({response: "Something went wrong with the DB"});
+                return res.status(500).redirect('/login?Something went wrong with the DB, try again!');
             }
     
         } else {
-            console.log('notworking')
             return res.status(500).send({response: "Username or password missing"});
         }  
     }

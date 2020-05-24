@@ -34,8 +34,8 @@ router.post('/newcourse', (req,res) => {
               else {
                   Elective.query().insert({
                     course_name,
-                    user_id: '1'
-                  }).then(newCourse => res.send({response: newCourse}))
+                    user_id: req.session.userId
+                  }).then(res.redirect("/profile"))
               }
             })
     }

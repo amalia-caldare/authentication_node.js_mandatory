@@ -7,20 +7,23 @@ body {
   }
   h1,
   h2,
-  p {
+  p,
+  a{
     font-weight: bold;
   }
   p {
     font-size: 16px;
     color: #cdcdcd;
   }
- .container-form {
+ .container-form,.courses-list {
     background-color: white;
     width: 300px;
     padding: 50px;
     margin: 0 auto;
-    display:inline-block;
-    
+    display:inline-block; 
+ }
+ .courses-list p{
+    color: black;
  }
  .form-group{
      text-align: left;
@@ -45,6 +48,10 @@ a{
     text-decoration: none;
     color: black; 
     display: inline;
+}
+.signup {
+    border: 1px solid wheat;
+    background-color: wheat;
 }
 ul {
     list-style: none;

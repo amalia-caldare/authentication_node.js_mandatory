@@ -1,16 +1,20 @@
 <%- include ('navbar.ejs') %>
 <h2 class="welcome-message">Welcome <%=user[0].username%>!</h2>
 <% if(course.length > 0) { %>
-    <h3 class="list">Your courses: </h3>
-    <ul class="course-list">
+    <div class="courses-list">
+     <h3>Your courses: </h3>
+     <ul class="course-list">
         <% course.forEach((item) =>{ %>
             <li><%=item.courseName%></li>
             <% });%>
     </ul>
+    <a class="signup" href='/newcourse'>Sign up for another course</a>
+    </div>
 <% } else { %>
-    <p>You are not enrolled in any course this semester.</p>
-    <a href='#'>Click here to enroll for a course!</a>
+    <div class="courses-list">
+        <p>You are not enrolled in any course this semester.</p>
+       <a class="signup" href='/newcourse'>Sign up for a course</a>
+    </div> 
 <%} %>
-</ul>
 </body>
 </html>
