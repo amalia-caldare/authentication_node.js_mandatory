@@ -1,7 +1,9 @@
-
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
 exports.seed = function(knex) {
+
       return knex('users').insert([
-        {username: 'amalia', email: 'amaliacaldare20@gmail.com', password: '$2b$12$be6phplKjcm8XFbxVLBCVeaTM28QCzwgF8.OwLwMgJQWF2U4KNO/C'},
-        {username: 'emilia', email: 'emilia@gmail.com', password: '$2b$12$be6phplKjcm8XFbxVLBCVeaTM28QCzwgF8.OwLwMgJQWF2U4KNO/C'}
+        {username: 'amalia', email: 'amaliacaldare20@gmail.com', password: bcrypt.hashSync('12345678900', saltRounds)},
+        {username: 'emilia', email: 'emilia@gmail.com', password: bcrypt.hashSync('mypassword', saltRounds)}
       ]);
 };

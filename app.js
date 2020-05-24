@@ -3,16 +3,13 @@ const app = express();
 
 const fs = require('fs');
 
+app.set('view engine', 'ejs')
+
 app.use(express.urlencoded({ extended: false }))
 
 app.use(express.json());
 
-app.use(express.static('public'));
-
-const navbarPage = fs.readFileSync(__dirname + "/public/navbar/navbar.html", "utf8")
-const signupPage = fs.readFileSync(__dirname + "/public/signup/signup.html", "utf8");
-const loginPage = fs.readFileSync(__dirname + "/public/login/login.html", "utf8");
-const userPage = fs.readFileSync(__dirname + "/public/profile/profile.html", "utf8");
+app.use(express.static('views'));
 
 const session = require('express-session');
 
@@ -66,25 +63,19 @@ app.get('/', (req,res) =>{
 });
 
 app.get('/signup', (req,res) => {
-    return res.send(navbarPage + signupPage);
+    if(req.session.username){
+        return res.redirect('/profile');
+    }
+    return res.render('signup');
 });
 
 app.get('/login', (req,res) => {
     if(req.session.username){
-        return res.redirect("/profile");
+        return res.redirect('/profile');
     }
       else {
-        return res.send(navbarPage + loginPage);
+        return res.render('login');
       }
-});
-
-app.get('/profile', (req,res) => {
-    if(req.session.username) {
-        return res.send(navbarPage + userPage);
-    }
-    else {
-        return res.redirect("/login")
-    }
 });
 
 const PORT = 3000;

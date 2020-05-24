@@ -1,6 +1,6 @@
 const { Model} = require ('objection');
 
-const Elective = require('./Electives.js');
+const Elective = require('./Elective.js');
 
 class User extends Model {
     static tableName = 'users';

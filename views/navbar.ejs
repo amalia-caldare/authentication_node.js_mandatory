@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/global.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
+            <a class="navbar-brand" href="#">MyClassRoom</a>
           </div>
           <div class="list">
-            <a href="#">Home</a>
-            <a href="#">Log in</a>
-            <a href="#">Sign up</a>
-            <a href="#">Classroom</a>
-          </div>
-           
+            <% if(loggedIn == null) {%>
+              <a href="/login">Log in</a>
+            <% } else { %> 
+             <a href="/logout">Log out</a>
+            <% } %>
+          </div> 
         </div>
       </nav>
     

@@ -6,7 +6,8 @@ body {
     text-align: center;
   }
   h1,
-  h2 {
+  h2,
+  p {
     font-weight: bold;
   }
   p {
@@ -39,9 +40,12 @@ nav {
     border: 1px solid rgba(129, 110, 2, 0.966);
     margin-bottom: 30px;
 }
-.navbar a{
+a{
     margin-right: 5px;
     text-decoration: none;
     color: black; 
     display: inline;
+}
+ul {
+    list-style: none;
 }

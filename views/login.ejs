@@ -1,0 +1,30 @@
+<%- include ('navbar.ejs')%>
+<script>
+  function validateLogin() {
+    const username = document.forms.loginfrom.username.value;
+    const password = document.forms.loginform.password.value;
+    if(password.length < 9) {
+        alert("Password must be 8 characters or longer.")
+        return false;
+    }
+    return true;
+  }
+  </script>
+<div class="container-form">
+    <form action="/login" method="POST" name='loginform' onsubmit="return validateLogin()"> 
+        <h2>Log in</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="username" class="form-control" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form> 
+      <p></p>
+      <p>No account? <a href="/signup"> Sign up</a></p>
+</div>
+</body>
+</html>
