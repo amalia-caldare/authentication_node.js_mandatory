@@ -1,6 +1,6 @@
-<%- include ('navbar.ejs')%>
+<%- include ('../navbar/navbar.ejs')%>
 <div class="container-form">
-    <form action="/signup" method="POST"> 
+    <form action="/signup" method="POST" name="signupform" onsubmit="return validateSignup()"> 
       <h2>Sign up</h2>
         <div class="form-group">
           <label for="username">Username</label>
@@ -17,5 +17,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form> 
     </div>
+    <script src="/signup.js"></script>
 </body>
 </html>

@@ -7,8 +7,8 @@ router.get('/profile', async (req, res) => {
     if(req.session.username) {
         const electivesOfUser = await Elective.query().select('course_name').where('user_id', req.session.userId);
         const userDetails = await User.query().select().where('username', req.session.username);
-        return res.render('profile', {user: userDetails,
-                                      course: electivesOfUser })
+        return res.render('profile/profile', {user: userDetails,
+                                              course: electivesOfUser })
         }
     else {
         return res.redirect("/login")
@@ -46,7 +46,7 @@ router.post('/newcourse', (req,res) => {
 
 router.get('/newcourse', (req,res) => {
     if(req.session.username) {
-        return res.render('newcourse');
+        return res.render('newcourse/newcourse');
     }
     else res.redirect('/login');
 })

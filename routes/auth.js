@@ -68,7 +68,7 @@ router.post('/signup', (req,res) => {
                 try {
                     User.query().select('username').where('username', username).then(foundUser =>{
                         if(foundUser.length > 0) {
-                            return res.status(400).send({response: "User already exists"});
+                            return res.status(400).redirect('/signup?User already exists');
     
                         } else {
                             bcrypt.hash(password,saltRounds).then(hashedPassword => {
@@ -87,7 +87,7 @@ router.post('/signup', (req,res) => {
                     }
                 });               
                 } catch (error) {
-                    return res.status(500).redirect('/login');
+                    return res.status(500).redirect('/login?Something went wrong with the DB. Try again');
                 }
             }
         } 
@@ -113,8 +113,8 @@ function sendEmail(to) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            email: nodemailerCredentials.email,
-            pass: nodemailerCredentials.password
+            user: nodemailerCredentials.email,
+            pass: nodemailerCredentials.password,
         }
     });
     

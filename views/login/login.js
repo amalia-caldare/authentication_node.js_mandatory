@@ -7,3 +7,7 @@ function validateLogin() {
     return true;
   }
 
+const errorMessage = window.location.search;
+if(errorMessage) {
+    alert("Wrong username or password.");
+}

@@ -20,22 +20,22 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 
-// const limiter = rateLimit({
-//     windowMs: 15 * 60 * 1000, //15 minutes
-//     max: 100 // limit each IP to 100 requests per windowMs
-// });
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, //15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
 
-// app.use(limiter);
+app.use(limiter);
 
-// const authLimiter = rateLimit({
-//     windowMs: 15 * 60 * 1000, //15 minutes
-//     max: 8 // limit each IP to 8 requests per windowMs
-// });
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, //15 minutes
+    max: 8 // limit each IP to 8 requests per windowMs
+});
 
-//  app.use('/signup',authLimiter);
-//  app.use('/login', authLimiter);
+ app.use('/signup',authLimiter);
+ app.use('/login', authLimiter);
 
 // Setup Knex with Objection
 
@@ -64,7 +64,7 @@ app.get('/signup', (req,res) => {
     if(req.session.username){
         return res.redirect('/profile');
     }
-    return res.render('signup');
+    return res.render('signup/signup');
 });
 
 app.get('/login', (req,res) => {
@@ -72,7 +72,7 @@ app.get('/login', (req,res) => {
         return res.redirect('/profile');
     }
       else {
-        return res.render('login');
+        return res.render('login/login');
       }
 });
 
